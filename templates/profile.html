@@ -1,0 +1,234 @@
+{% extends 'master/master.html' %}
+{% load staticfiles %}
+
+{% block title %}{{emp.name }} | {{emp.job_title}} {%endblock%}
+
+{% block body %}
+<!-- Page Heading -->
+<section class="page-heading">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>{{emp.name}}</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Page Heading / End -->
+<div class="container">
+  <section class="page-content">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4">
+          <figure class="alignnone">
+            {% if emp.image %}
+              <img src="{{MEDIA_URL}}{{emp.image.url}}" alt="">
+            {% else %}
+               <img src="{% static 'images/samples/team-member-1-lg.jpg' %}">
+            {% endif %}
+
+          </figure>
+        </div>
+        <div class="col-md-8">
+          <div class="spacer visible-sm visible-xs"></div>
+          <div class="team-single-head">
+            <div class="row">
+              <div class="col-md-11 col-sm-12">
+                <h2>{{emp.name}}<small>/ {{emp.job_title}}</small></h2>
+              </div>
+              <div class="col-md-1 col-sm-12">
+                <h5 style="color:green;"><a data-toggle="modal" data-target="#myprofile"><i class="fa fa-pencil"></i></a></h5>
+              </div>
+            </div>
+          </div>
+          <p>{% autoescape off %}{{emp.about}} {% endautoescape %}</p>
+
+          <p><h6><i class="fa fa-map-marker"></i>&nbsp;&nbsp;{{emp.address}}</h6></p>
+          <p><h6><i class="fa fa-globe"></i>&nbsp;&nbsp;<a href="{{emp.portfolio}}" target="_blank">{{emp.portfolio}}</a></h6></p>
+            <p><h6><i class="fa fa-mobile"></i>&nbsp;&nbsp;{{emp.contact}}</h6></p>
+          </div>
+        </div>
+        <hr class="lg">
+
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Experience&nbsp;<a href="#" data-toggle="modal" data-target="#experience"><i class="fa fa-plus"></i></a></h3>
+           {% for ex in exp %}
+            <p>
+              <h6><i class="fa fa-briefcase"></i> {{ex.position}}</h6>
+              <span style="margin-left:5%;">{{ex.company}}({{ex.start_date}}-{{ex.end_date}})</span>
+            </p>
+          {% endfor %}
+          </div>
+          <div class="col-md-4">
+            <h3>My Skill&nbsp;<a href="#" data-toggle="modal" data-target="#skill"><i class="fa fa-plus"></i></a></h3>
+          {% for s in skill %}
+            <h6>{{s.skill}}</h6>
+         {% endfor %}
+          </div>
+          <div class="col-md-4">
+            <h3>Degree &nbsp;<a href="#" data-toggle="modal" data-target="#degree"><i class="fa fa-plus"></i></a></h3>
+          {% for s in degree %}
+            <h6>{{s.degree_name}}</h6>
+         {% endfor %}
+          </div>
+        </div>
+        <hr class="lg">
+
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Past Project&nbsp;<a href="#" data-toggle="modal" data-target="#project"><i class="fa fa-plus"></i></a></h3>
+           {% for ex in project %}
+            <p>
+              <h6><i class="fa fa-angle-right"></i> {{ex.project_name}}</h6>
+              <span style="margin-left:5%;"><a href="{{ex.project_link}}">{{ex.project_link}}</a></span>
+            </p>
+          {% endfor %}
+          </div>
+          <div class="col-md-6">
+            <h3>CV&nbsp;<a href="#" data-toggle="modal" data-target="#cv"><i class="fa fa-plus"></i></a></h3>
+           {% for ex in cv %}
+            <p>
+              <h6><i class="fa fa-angle-right"></i> <a href="{{MEDIA_URL}}{{ex.cv_file.url}}" target="_blank">{{ex.cv_name}}</a></h6>
+            </p>
+          {% endfor %}
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+  </div>
+
+  <!--model -->
+  <div class="modal fade bs-example-modal-lg" id="myprofile" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <h4 class="modal-title" id="myModalLabel">Update Profile</h4>
+       </div>
+       <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data">
+       <div class="modal-body">
+        {{empform.as_table}}
+      </div>
+      {% csrf_token %}
+      <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       <button type="submit" class="btn btn-primary">Save changes</button>
+     </div>
+   </form>
+      </div>
+    </div>
+  </div>
+  <!--Experience model -->
+  <div class="modal fade bs-example-modal-md" id="experience" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <form method="post" action="{% url 'add_experience' %}">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h6 class="modal-title">Experience</h6>
+      </div>
+      <div class="modal-body">
+        {{experienceform.as_p}}
+      </div>
+      {% csrf_token %}
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<!--skill model -->
+<div class="modal fade bs-example-modal-md" id="skill" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal-dialog modal-md" role="document">
+  <div class="modal-content">
+    <form method="post" action="{% url 'add_skill' %}">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h6 class="modal-title">Add Skill</h6>
+    </div>
+    <div class="modal-body">
+      {{skillform.as_p}}
+    </div>
+    {% csrf_token %}
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+  </div>
+</div>
+</div>
+
+<!--skill model -->
+<div class="modal fade bs-example-modal-md" id="degree" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal-dialog modal-md" role="document">
+  <div class="modal-content">
+    <form method="post" action="{% url 'add_degree' %}">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h6 class="modal-title">Add Degree</h6>
+    </div>
+    <div class="modal-body">
+      {{degreeform.as_p}}
+    </div>
+    {% csrf_token %}
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+  </div>
+</div>
+</div>
+
+<!--project model -->
+<div class="modal fade bs-example-modal-md" id="project" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal-dialog modal-md" role="document">
+  <div class="modal-content">
+    <form method="post" action="{% url 'add_project' %}">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h6 class="modal-title">Add Project</h6>
+    </div>
+    <div class="modal-body">
+      {{projectform.as_p}}
+    </div>
+    {% csrf_token %}
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+  </div>
+</div>
+</div>
+
+<!--cv model -->
+<div class="modal fade bs-example-modal-md" id="cv" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal-dialog modal-md" role="document">
+  <div class="modal-content">
+    <form method="post" action="{% url 'add_cv' %}" enctype="multipart/form-data">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h6 class="modal-title">Add Cv</h6>
+    </div>
+    <div class="modal-body">
+      {{cvForm.as_p}}
+    </div>
+    {% csrf_token %}
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+  </div>
+</div>
+</div>
+  <!--end of model -->
+  {% endblock %}

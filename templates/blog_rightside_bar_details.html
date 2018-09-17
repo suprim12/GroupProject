@@ -1,0 +1,36 @@
+{% extends 'master/master.html' %}
+
+{% block title %} {{ blog.title }} {% endblock %}
+
+{% block body %}
+<div class="page-content">
+  <div class="container">
+
+    <div class="row">
+      <div class="content col-md-8">
+
+        <!-- Post (Standard Format) -->
+
+
+        <article class="entry entry__standard entry__with-icon">
+          <header class="entry-header">
+
+            <h3><a href="blog-post.html">{{blog.title}}</a></h3>
+          </header>
+          <div class="entry-thumb-wrapper">
+            <figure class="alignnone entry-thumb">
+              <a href="#"><img src="{{MEDIA_URL}}{{blog.image.url}}" alt=""></a>
+            </figure>
+          </div>
+          <div class="excerpt">
+            {% autoescape off %}{{blog.content}}{% endautoescape %}
+          </div>
+
+        </article>
+        <!-- Post (Standard Format) / End -->
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}

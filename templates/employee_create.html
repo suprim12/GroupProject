@@ -1,0 +1,39 @@
+{% extends 'master/master.html' %}
+
+{% block title %}Create Employee Account{%endblock%}
+
+{% block body %}
+<div class="row">
+
+  <div class="container">
+    <div class="col-md-6 col-md-offset-3">
+
+      <div class="spacer-lg visible-sm visible-xs"></div>
+      <div class="box">
+        {% if msg %}
+        <p class="alert alert-danger">{{msg}}</p>
+        {% endif %}
+        <form action="{% url 'employee_create' %}" method="POST" role="form">
+          {% for f in form %}
+          <div class="form-group">
+            <label>{{f.label_tag}} <span class="required">*</span></label>
+            {{f|add_class:'form-control'}}
+
+            <ul style:"color:red;">
+              {% for error in f.errors %}
+              <li>{{error}}</li>
+              {% endfor %}
+            </ul>
+            {% csrf_token %}
+          </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary"> Sumbit </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock %}

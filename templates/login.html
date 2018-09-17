@@ -1,0 +1,52 @@
+{% extends 'master/master.html' %}
+{% block title %}Login  {%endblock%}
+
+{% block body %}
+
+<!-- Page Heading -->
+    <section class="page-heading">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Login</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Page Heading / End -->
+
+    <!-- Page Content -->
+    <section class="page-content">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="spacer-lg visible-sm visible-xs"></div>
+            <div class="box">
+              <h3>Login</h3>
+              <form action="{% url 'login' %}" method="POST" role="form">
+                {% for f in form %}
+                <div class="form-group">
+                  <label>{{f.label_tag}} <span class="required">*</span></label>
+                  {{f|add_class:'form-control'}}
+
+                  <ul style:"color:red;">
+                  {% for error in f.errors %}
+                  <li>{{error}}</li>
+                  {% endfor %}
+                  </ul>
+                  {% csrf_token %}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary"> Login </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- Page Content / End -->
+
+
+{%endblock%}

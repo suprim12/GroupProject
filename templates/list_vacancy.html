@@ -1,0 +1,23 @@
+{% extends 'master/master.html' %}
+{% block title %}Company Dashboard {%endblock%}
+
+{% block body %}
+<div class="container">
+  <div class="col-md-8">
+    <h1>All Vacancy</h1>
+    <a href="{% url 'companyprofile' %}" class="btn btn-primary">Update Profile</a>
+    <a href="{% url 'add_vacancy' %}" class="btn btn-primary">Add Vacancy</a>
+    <hr />
+    {% for v in vacancy %}
+    <div class="row">
+      <h3>{{v.job_title}}</h3>
+      <p>{% autoescape off %}{{v.description|truncatewords:20}}{% endautoescape%}</p>
+      <p><a class="btn btn-info" href="{% url 'job_details' v.id %}">Read more</a>
+        <a class="btn btn-primary" href="{% url 'job_update' v.id %}">Update</a>
+        <a class="btn btn-danger" href="{% url 'job_delete' v.id %}">Delete</a></p>
+    </div>
+    <hr />
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

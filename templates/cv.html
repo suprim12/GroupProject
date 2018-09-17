@@ -1,0 +1,35 @@
+{% extends 'master/master.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Employee Cv {%endblock%}
+
+{% block body %}
+
+<div class="row">
+
+  <div class="container">
+    <div class="col-md-6 col-md-offset-3">
+
+      <div class="spacer-lg visible-sm visible-xs"></div>
+      <div class="box">
+        {% if msg %}
+          <p class="alert alert-danger">{{msg}}</p>
+        {% endif %}
+        <form action="{% url 'user_cv' %}" method="POST" role="form" enctype="multipart/form-data">
+          {% for f in form %}
+          <div class="form-group">
+            <label>{{f.label_tag}} <span class="required">*</span></label>
+            {{f|add_class:'form-control'}}
+
+            {% csrf_token %}
+          </div>
+          {% endfor %}
+
+          <button type="submit" class="btn btn-primary"> Sumbit </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

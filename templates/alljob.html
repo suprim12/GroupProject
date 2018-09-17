@@ -1,0 +1,210 @@
+{% extends 'master/master.html' %}
+{% load staticfiles %}
+
+{%block title %} Home {%endblock%}
+
+{% block body %}
+<!-- Page Content -->
+<section class="page-content">
+  <div class="container">
+
+    <!-- Listings -->
+    <div class="title-bordered section-light section-nomargin">
+      <h2>Job Recomended for you <small>Latest added</small></h2>
+      <div class="container">
+        {% for v in vacancy %}
+        <div class="col-sm-3">
+          <h4>{{v.job_title}}</h4>
+          <p>{% autoescape off %} {{v.description|truncatewords:10}}{% endautoescape %}</p>
+          <a href="{% url 'job_details' v.id %}" class="btn btn-primary">Read More</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="spacer"></div>
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <a class="btn btn-default btn-block" href="#">View All Professionals</a>
+      </div>
+    </div>
+
+    <!-- Listings / End -->
+
+    <div class="spacer-xxl"></div>
+
+
+
+    <div class="spacer-lg"></div>
+
+    <!-- Services -->
+    <div class="title-bordered">
+      <h2>Who are here ?<small>services we provided</small></h2>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="icon-box">
+          <div class="icon">
+            <i class="fa fa-bug"></i>
+          </div>
+          <div class="icon-box-body">
+            <h5>Pest Control</h5>
+            <p>We use the latest technology to test new and innovated products so we can protect.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="icon-box">
+          <div class="icon">
+            <i class="fa fa-cog"></i>
+          </div>
+          <div class="icon-box-body">
+            <h5>Engineering Consultant</h5>
+            <p>Consulting engineering is a professional service that provides independent expertise.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="icon-box">
+          <div class="icon">
+            <i class="fa fa-recycle"></i>
+          </div>
+          <div class="icon-box-body">
+            <h5>Environmental Consulting</h5>
+            <p>Managing, protecting and restoring the environment are integral to our services.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="icon-box">
+          <div class="icon">
+            <i class="fa fa-suitcase"></i>
+          </div>
+          <div class="icon-box-body">
+            <h5>Handiwork</h5>
+            <p>We are professional tile installers who can install and repair tile in many areas of your home.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="icon-box">
+          <div class="icon">
+            <i class="fa fa-lightbulb-o"></i>
+          </div>
+          <div class="icon-box-body">
+            <h5>Lighting Design</h5>
+            <p>Professional lighting designers dedicate their careers exclusively to the art and science of lighting.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="icon-box">
+          <div class="icon">
+            <i class="fa fa-cube"></i>
+          </div>
+          <div class="icon-box-body">
+            <h5>Storage</h5>
+            <p>Hiring our professional handyman services ensures proper storage installation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="icon-box">
+          <div class="icon">
+            <i class="fa fa-tree"></i>
+          </div>
+          <div class="icon-box-body">
+            <h5>Tree Service</h5>
+            <p>Provides vegetation management, storm restoration, and work planning services.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="icon-box">
+          <div class="icon">
+            <i class="fa fa-car"></i>
+          </div>
+          <div class="icon-box-body">
+            <h5>Moving</h5>
+            <p>Whether you're moving down the street or across the country, we'll help you manage your relocation
+              stress.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="icon-box">
+          <div class="icon">
+            <i class="entypo tools"></i>
+          </div>
+          <div class="icon-box-body">
+            <h5>General Contracting</h5>
+            <p>We develop special tailor-made solutions in collaboration with our customers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Services / End -->
+
+    <!-- Clients -->
+    <div class="section-light section-bg2 section-overlay__yes section-overlay-color__primary section-overlay_opacity-90"
+      data-stellar-background-ratio="0.5">
+      <div class="section-inner">
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <div class="text-center">
+              <a href="#"><img src="images/samples/client-logo1-dark.png" alt="" class="img-responsive"></a>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="text-center">
+              <a href="#"><img src="images/samples/client-logo2-dark.png" alt="" class="img-responsive"></a>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="text-center">
+              <a href="#"><img src="images/samples/client-logo3-dark.png" alt="" class="img-responsive"></a>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="text-center">
+              <a href="#"><img src="images/samples/client-logo4-dark.png" alt="" class="img-responsive"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Clients / End -->
+
+    <div class="spacer"></div>
+
+    <!-- Testimonials -->
+    <div class="title-bordered">
+      <h2>Testimonials <small>what clients say</small></h2>
+    </div>
+    <div class="row">
+      {% for t in testimonial %}
+      <div class="col-md-3">
+        <div class="testimonial">
+          <blockquote>
+            <p>{{t.message}}</p>
+          </blockquote>
+          <div class="bq-author">
+            <h6>{{t.name}}</h6>
+            <span class="bq-author-info">{{t.designation}}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- Testimonials / End -->
+
+  </div>
+</section>
+<!-- Page Content / End -->
+
+
+{% endblock %}

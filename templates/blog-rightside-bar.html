@@ -1,0 +1,90 @@
+{% extends 'master/master.html'%}
+
+{% block title %}Rightside Bar{% endblock %}
+
+
+{%block body %}
+<!-- Page Heading -->
+    <section class="page-heading">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Blog</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Page Heading / End -->
+
+    <!-- Page Content -->
+    <div class="page-content">
+      <div class="container">
+
+        <div class="row">
+          <div class="content col-md-8">
+
+            <!-- Post (Standard Format) -->
+            {% for x in blog %}
+
+            <article class="entry entry__standard entry__with-icon">
+              <header class="entry-header">
+                <div class="entry-author visible-md visible-lg">
+                  <img src="images/samples/post-author1.jpg" alt="">
+
+                </div>
+                <h3><a href="blog-post.html">{{x.title}}</a></h3>
+              </header>
+              <div class="entry-thumb-wrapper">
+                <figure class="alignnone entry-thumb">
+                  <a href="#"><img src="{{MEDIA_URL}}{{x.image.url}}" alt=""></a>
+                </figure>
+              </div>
+              <div class="excerpt">
+                {% autoescape off %}{{x.content|truncatewords:50}}{% endautoescape %}
+              </div>
+              <footer class="entry-footer">
+                <a href="{% url 'blog_details' x.id %}" class="btn btn-primary"  >Continue Reading</a>
+              </footer>
+            </article>
+            <!-- Post (Standard Format) / End -->
+
+            {% endfor %}
+          </div>
+
+          <aside class="sidebar col-md-4">
+
+            <hr class="visible-sm visible-xs lg">
+
+            <!-- Widget :: Text Widget -->
+            <div class="widget_text widget widget__sidebar">
+              <h4 class="widget-title">Short Info</h4>
+              <div class="widget-content">
+                this is the smart way of job searching portals where employee and employeer are directly meet without third party
+              </div>
+            </div>
+            <!-- /Widget :: Text Widget -->
+
+            <!-- Widget :: Latest Posts -->
+            <div class="widget_latest-posts widget widget__sidebar">
+              <h4 class="widget-title">Latest Posts</h4>
+              <div class="widget-content">
+                <ul class="latest-posts-list">
+                  {% for b in blogf %}
+                  <li>
+                    <figure class="thumbnail"></figure>
+                    <h5 class="title"><a href="{% url 'blog_details' b.id %}">{{b.title}}</a></h5>
+                  </li>
+               {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <!-- /Widget :: Latest Posts -->
+
+          </aside>
+        </div>
+
+      </div>
+    </div>
+    <!-- Page Content / End -->
+
+{%endblock%}

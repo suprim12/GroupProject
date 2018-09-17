@@ -1,0 +1,23 @@
+{% extends 'master/master.html' %}
+{% load staticfiles %}
+{% block title %}Search Result{% endblock %}
+{% block body %}
+<div class="spacer-xl"></div>
+
+<!-- Listings -->
+<div class="title-bordered">
+  <h2>Search Result <small>Latest added</small></h2>
+</div>
+<div class="container">
+  {% for v in vacancy %}
+  <div class="col-sm-3">
+    <h4>{{v.job_title}}</h4>
+    <p>{% autoescape off %} {{v.description|truncatewords:10}}{% endautoescape %}</p>
+    <a href="{% url 'job_details' v.id %}" class="btn btn-primary">Read More</a>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="spacer"></div>
+
+{% endblock %}

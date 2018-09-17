@@ -1,0 +1,17 @@
+{% extends 'master/master.html' %}
+{% block title %}Company Dashboard {%endblock%}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Add New Vacancy Vacancy</h1>
+      <form method="post" action="{% url 'add_vacancy' %}">
+        {{form.as_p}}
+        {% csrf_token %}
+        <br />
+        <button type="submit" class="btn btn-primary">Publish</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
